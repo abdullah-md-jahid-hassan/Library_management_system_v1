@@ -1,8 +1,11 @@
 import csv
 
 def save_all_books(all_books):
-    with open('books.csv', mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=["title", "author", "isbn", "year", "price", "quantity"])
-        writer.writeheader()
-        for book in all_books:
-            writer.writerow(book)
+    try:
+        with open('books.csv', mode='w', newline='') as file:
+            fieldnames = ['title', 'author', 'isbn', 'year', 'price', 'quantity']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(all_books)
+    except Exception as e:
+        print(f"Error saving books: {e}")
